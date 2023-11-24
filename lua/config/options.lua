@@ -10,6 +10,9 @@ opt.relativenumber = false
 -- window title for each split
 opt.winbar = "%=%m %f"
 
+-- Disable autoformatting (for lspconfig)
+vim.g.autoformat = false
+
 function StripTrailingWhitespace()
   local bufnr = vim.api.nvim_get_current_buf()
   local bufcontent = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
