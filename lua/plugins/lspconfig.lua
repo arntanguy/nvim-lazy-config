@@ -57,7 +57,10 @@ return {
                   ".github")(fname)
                 or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname)
                 or util.find_git_ancestor(fname)
-            end
+            end,
+            capabilities = {
+              offsetEncoding = { 'utf-16' }
+            }
           })
           return true
       end,
