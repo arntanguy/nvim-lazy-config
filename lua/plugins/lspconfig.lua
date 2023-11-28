@@ -39,7 +39,28 @@ return {
             },
           })
           return true
-        end
+        end,
+        clangd = function(_, _)
+          print("clangd setup")
+          require("lspconfig").clangd.setup({
+            root_dir = function(fname)
+              local util = require("lspconfig.util")
+              return
+                util.root_pattern(
+                  "Makefile",
+                  "configure.ac",
+                  "configure.in",
+                  "config.h.in",
+                  "meson.build",
+                  "meson_options.txt",
+                  "build.ninja",
+                  ".github")(fname)
+                or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname)
+                or util.find_git_ancestor(fname)
+            end
+          })
+          return true
+      end,
         -- Specify * to use this function as a fallback for any server
         -- ["*"] = function(server, opts) end,
       },
