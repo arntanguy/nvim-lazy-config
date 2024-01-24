@@ -4,7 +4,8 @@ return {
   -- syntax highlighting.
   "nvim-treesitter/nvim-treesitter",
   opts = {
-    highlight = { enable = false },
+    highlight = { enable = true },
+    ensure_installed = { "markdown", "markdown_inline"},
     indent = { enable = false, disable = { "yaml" } }
   },
 }
