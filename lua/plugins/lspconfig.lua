@@ -41,11 +41,11 @@ return {
           return true
         end,
         clangd = function(_, _)
-          print("clangd setup")
+          -- print("clangd setup")
           require("lspconfig").clangd.setup({
             root_dir = function(fname)
               local util = require("lspconfig.util")
-              return
+              local root_dir =
                 util.root_pattern(
                   "Makefile",
                   "configure.ac",
@@ -57,9 +57,12 @@ return {
                   ".github")(fname)
                 or util.root_pattern("compile_commands.json", "compile_flags.txt")(fname)
                 or util.find_git_ancestor(fname)
+              -- print("fname is: "..fname)
+              -- print("clangd root_dir is: "..root_dir)
+              return root_dir
             end,
             capabilities = {
-              offsetEncoding = { 'utf-16' }
+              offsetEncoding = { 'utf-16' } -- for github copilot
             }
           })
           return true
